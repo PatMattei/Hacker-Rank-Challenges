@@ -1,30 +1,34 @@
 # repeat the letters in the string n times 
 def repeatedString(s, n)
-	aCounter = 0
-	lettersCounted = 0
-	placeInString = 0;
 	#break letters into an array
-	arr = s.split("");
-
-
-	#while letters coutned is less than n
-	while lettersCounted < n do
-		puts arr[placeInString];
-
-		#if letter is 'a' counter +1
-		if arr[placeInString] == 'a' then
-			aCounter = aCounter+1;
-		end
-		#if we're on the last letter
-		if placeInString == arr.length-1 then 
-			placeInString = 0;
-		else 
-			placeInString = placeInString+1;
-		end
-		lettersCounted = lettersCounted+1
+	arr = s.split("")
+	
+	#get hash of letter frequency
+	counts = Hash.new 0
+	arr.each do |letter|
+  		counts[letter] += 1
 	end
 
-	aCounter;
+	
+	if counts['a'] == 0 || counts ['a'] == nil then 
+		#if there are no 'a's
+		0
+	elsif n % s.length == 0 then 
+		#if the length of string goes into n evenly, then the string is repated that many times easily
+		counts['a'] * (n/s.length)
+	else
+		#get closest whole number
+		aCount = counts['a'] * (n/s.length)
+		remainingChars = n - ((n/s.length) * s.length)
+		
+		#iterate through string arr for number of remainingChars
+		for i in 1..remainingChars
+			if arr[i-1] == 'a' then
+				aCount += 1
+			end
+		end
+		aCount
+	end
 end
 
-puts repeatedString('ab', 100);
+puts repeatedString('aba', 9000000000000000);
