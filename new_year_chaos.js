@@ -13,18 +13,18 @@ function minimumBribes(q) {
 		} 
 	}
 
+	//loop through q until the last positions are the same
 	while (a[a.length-1] !== q[a.length-1]) {
 		for(var i = 0; i < q.length; i++){
 			if (q[i] != a[i]) {
+				//indx is final position 
 				let indx = a.indexOf(q[i]);
 				let num = q[i];
 
-				console.log(q[i])
-
 				bribes+= (indx-i);
-
+				
 				a.splice(i, 0, num);
-				a.splice(indx, 1);
+				a.splice(indx+1, 1);
 			}
 		}
 	}
